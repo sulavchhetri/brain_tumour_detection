@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block css %}
+.goback{
+    text-decoration: none; 
+    padding: 15px 30px;
+    color: white;  
+    background-color: #dc3545;
+    border:2px solid black;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+}
+
+.goback:hover{
+    background-color: red;
+}
+{% endblock %}
+
+{% block body %}
+<div class="d-flex flex-row" style="height:100%;">
+    <div class="row col-4">
+        <div class="d-flex flex-column">
+            <div class="'row">
+                <div class="pt-3">
+                    <h1 style="font-size: 50px; font-family: 'Bungee Outline', cursive;">Brain Tumor <br>Detection</h1>
+                </div>
+            </div>
+            <div class="row pt-5" style="font-family: 'Anton', sans-serif;">
+                <div class="d-flex flex-column" style="width: 100%; padding-left:50px;">
+                    <div class="row">
+                        <a class="menu" href="{% url 'home' %}">HOME</a>
+                    </div>
+                    <div class="row">
+                        <a class="menu" href="{% url 'about' %}">ABOUT</a>
+                    </div>
+                    <div class="row">
+                        <a class="menu" href="{% url 'credits' %}">CREDITS</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row col-8 justify-content-center align-items-center">
+        <div class="d-flex justify-content-center">
+            <div class="d-flex flex-column justify-content-center align-items-center">
+                {% if error == 0 %}
+                <div style="font-size:30px">
+                    Please upload image to get result.
+                </div>
+                {% elif error == 1 %}
+                <div style="font-size:30px">
+                    You have got <span class="{% if result == 'No Tumor' %}text-success{% else %}text-danger{% endif %}">{{result}}</span>.
+                </div>
+                <div class="mt-3">
+                    <img src="data:image/jpeg;base64, {{img}}" alt="" height="400" width="400">
+                </div>
+                {% else %}
+                <div style="font-size:30px">
+                    Please upload correct image to get result.
+                </div>
+                {% endif %}
+                <div class="mt-5">
+                    <a class="goback" href="{% url 'home' %}">Go Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}
